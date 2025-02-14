@@ -1,7 +1,8 @@
 import yfinance as yf
 
 # 获得雅虎数据
-ticker = yf.Ticker("601318.SS")
-data = ticker.history(period="max")
+ticker = yf.Ticker("M2505.DCE")
+data = ticker.history(period="1mo", interval="1d")
 
-print(data.head())
+print(data[["Open", "High", "Low", "Close", "Volume"]])
+

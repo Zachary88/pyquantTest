@@ -7,6 +7,6 @@ jq.auth("17620111577", "ZwC226178@#")
 count = jq.get_query_count()
 print(count)
 """
+infos = jq.get_future_contracts("M")
 
-infos = jq.get_futures_info(["m2505.XDCE"])
 print(infos)

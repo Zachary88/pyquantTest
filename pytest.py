@@ -1,8 +1,14 @@
-import yfinance as yf
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
 
-# 获得雅虎数据
-ticker = yf.Ticker("M2505.DCE")
-data = ticker.history(period="1mo", interval="1d")
+# 创建一个简单的 Sequential 模型
+model = Sequential()
+model.add(Dense(64, activation='relu', input_shape=(10,)))
+model.add(Dense(1, activation='sigmoid'))
 
-print(data[["Open", "High", "Low", "Close", "Volume"]])
+# 编译模型
+model.compile(optimizer='adam', loss='binary_crossentropy')
 
+# 打印模型结构
+model.summary()

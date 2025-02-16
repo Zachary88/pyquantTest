@@ -32,10 +32,16 @@ for i in range(3, len(arr)):
     X.append(arr[i-3:i, :-1])
     y.append(1 if arr[i, -1] > 0 else 0)
 X, y = np.array(X), np.array(y)
-print(f"X:{X}")
-print(f"y:{y}")
+#print(f"X:{X}")
+# print(f"y:{y}")
 
 # 划分训练集和测试集
+X_test = []
+X_test.append(arr[-3:, :-1])
+X_test = np.array(X_test)
+print(f"X_test:{X_test}")
+
+'''
 split = int(0.8 * len(X))
 X_train, X_test = X[:split], X[split:]
 y_train, y_test = y[:split], y[split:]
@@ -44,11 +50,9 @@ print(f"X_train:{X_train}")
 print(f"X_test:{X_test}")
 print(f"y_train:{y_test}")
 print(f"y_test:{y_test}")
+'''
 
-
-
-
-
+'''
 # 构建LSTM模型
 model = Sequential()
 model.add(LSTM(units=50, return_sequences=True, input_shape=(X_train.shape[1], X_train.shape[2])))
@@ -70,4 +74,4 @@ print(f'Test loss: {loss:.2f}')
 # 预测
 predictions = model.predict(X_test)
 #predictions = (predictions > 0.5).astype(int)
-print(predictions)
+'''

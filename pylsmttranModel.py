@@ -8,12 +8,11 @@ from tensorflow.keras.layers import LSTM, Dense
 
 
 # 数据加载与预处理
-data =ak.futures_zh_minute_sina(symbol="M2505", period="60")
+data =ak.futures_zh_minute_sina(symbol="EB2505", period="120")
 data['return'] = data['close'].pct_change()
 data = data.dropna()
 
-#print(data)
-
+print(data)
 
 scaler = MinMaxScaler(feature_range=(0, 1))
 scaled_data = scaler.fit_transform(data[['open', 'high', 'low', 'close', 'volume','hold','return']])
@@ -27,10 +26,7 @@ for i in range(60, len(scaled_data)):
     y.append(1 if scaled_data[i, -1] > 0 else 0)
 X, y = np.array(X), np.array(y)
 
-print(X)
-print(y)
 
-'''
 # 划分训练集和测试集
 split = int(0.8 * len(X))
 X_train, X_test = X[:split], X[split:]
@@ -47,6 +43,7 @@ model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy']
 
 # 训练模型
 model.fit(X_train, y_train, epochs=20, batch_size=32)
+# model.save("soybean_lstm_model.h5")
 
 # 评估模型
 loss, accuracy = model.evaluate(X_test, y_test)
@@ -57,4 +54,3 @@ print(f'Test Accuracy: {accuracy:.2f}')
 predictions = model.predict(X_test)
 #predictions = (predictions > 0.5).astype(int)
 print(predictions)
-'''

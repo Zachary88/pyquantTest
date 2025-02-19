@@ -15,8 +15,8 @@ while True:
     try:
         data = get_realtime_future()
         print(f"\n当前时间: {pd.Timestamp.now()}")
-        print(data[['symbol','time','open','current_price','volume']])
-        time.sleep(5)  # 5秒间隔
+        print(data[['symbol','high','low','time','open','current_price']])
+        time.sleep(10)  # 5秒间隔
         clear_print()
     except Exception as e:
         print(f"获取数据失败: {e}")
